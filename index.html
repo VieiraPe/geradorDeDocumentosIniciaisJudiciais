@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerador de Documentos Judiciais Dinâmico</title>
+    <meta
+      name="description"
+      content="Simplifique a criação de procurações, pedidos de gratuidade e declarações de ação. Otimize seu tempo com nosso gerador intuitivo e garanta precisão jurídica em cada etapa."
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Gerador de Documentos</h1>
+
+      <form id="formulario" method="post">
+        <h2>Dados do Cliente</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <input
+              type="text"
+              id="nomeCliente"
+              placeholder="Nome do Cliente"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <input
+              type="text"
+              id="nacionalidadeCliente"
+              value="brasileiro"
+              placeholder="Nacionalidade"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <select id="estadoCivilCliente" required>
+              <option value="" disabled selected>Estado Civil</option>
+              <option value="solteiro">Solteiro(a)</option>
+              <option value="casado">Casado(a)</option>
+              <option value="divorciado">Divorciado(a)</option>
+              <option value="viuvo">Viúvo(a)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <input
+              type="text"
+              id="profissaoCliente"
+              placeholder="Profissão"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <input type="text" id="rgCliente" placeholder="RG" required />
+          </div>
+
+          <div class="form-group">
+            <select id="expedidaPor" required>
+              <option value="" disabled selected>Órgão Expedidor</option>
+              <option value="DETRAN-RJ">DETRAN - RJ</option>
+              <option value="IFP">IFP</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <input type="text" id="cpfCliente" placeholder="CPF" required />
+          </div>
+
+          <!-- CAMPO CEP ATUALIZADO PARA SPINNER/CHECKMARK -->
+          <div class="form-group cep-input-group-container">
+            <input
+              type="text"
+              id="cepCliente"
+              name="cep"
+              placeholder="CEP"
+              required
+            />
+            <button type="button" id="cepButton">Buscar</button>
+            <div id="cepStatusContainer" class="cep-status-icons"></div>
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              id="numeroCliente"
+              placeholder="Número"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <input
+              type="text"
+              id="enderecoCliente"
+              name="enderecoCliente"
+              placeholder="Endereço"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <input
+              type="text"
+              id="bairroCliente"
+              placeholder="Bairro"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <input
+              type="text"
+              id="cidadeCliente"
+              placeholder="Cidade"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <input
+              type="text"
+              name="ufCliente"
+              id="ufCliente"
+              placeholder="UF"
+              required
+            />
+          </div>
+        </div>
+
+        <h2 style="margin-top: 30px">Selecione os Documentos</h2>
+        <div class="document-selection-grid">
+          <div class="form-group checkbox-group">
+            <input type="checkbox" id="chkProcuracao" checked />
+            <label for="chkProcuracao">PROCURAÇÃO</label>
+          </div>
+
+          <div class="form-group checkbox-group">
+            <input type="checkbox" id="chkGratuidade" />
+            <label for="chkGratuidade">GRATUIDADE DE JUSTIÇA</label>
+          </div>
+          <div class="form-group checkbox-group">
+            <input type="checkbox" id="chkDeclaracao" />
+            <label for="chkDeclaracao">DECLARAÇÃO CIÊNCIA</label>
+          </div>
+          <div class="form-group checkbox-group">
+            <input type="checkbox" id="chkContrato" />
+            <label for="chkContrato">CONTRATO </label>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit">Gerar Documentos Selecionados</button>
+        </div>
+      </form>
+
+      <hr />
+
+      <div id="documentosGeradosContainer">
+        <div id="previewDocumentoProcuracao" class="documento">
+          <h2>PROCURAÇÃO</h2>
+
+          <h3>Outorgante(s):</h3>
+          <p id="outorganteTextProcuracao"></p>
+
+          <h3>Outorgado(s):</h3>
+          <p id="outorgadoTextProcuracao">
+            <strong>REGINALDO FRANCISCO DA SILVA</strong>, brasileiro, solteiro,
+            advogado inscrito na OAB/RJ nº179612, Condomínio Centro Comercial
+            Barra Plaza - Av. Ayrton Senna, 1850, loja 118, Barra da Tijuca -
+            CEP 22.275-003 - llmadvocacia@bol.com.br
+          </p>
+
+          <h3>Poderes:</h3>
+          <p id="poderesTextProcuracao">
+            Com poderes para o foro em geral, com a cláusula "ad judicia, et
+            extra e ad negotia" podendo para tanto renunciar, transigir,
+            acordar, discordar, ratificar acordos e outros termos, além de
+            desistir, concordar e discordar com cálculos, receber, dar quitação,
+            substabelecer e transitar poderes a quem melhor lhe convier, com ou
+            sem reserva de poderes, podendo o outorgado, agir em conjunto ou
+            isoladamente, e usar de todos os meios em direito permitidos, para o
+            bom e fiel cumprimento do presente mandato.
+          </p>
+
+          <div class="data-assinatura">
+            <p>
+              Rio de Janeiro, _____ de _____________ de
+              <span data-ano-atual></span>
+            </p>
+            <div class="linha-assinatura"></div>
+            <p>Assinatura</p>
+          </div>
+
+          <div class="footer-advogado">
+            <p>LLM ADVOCACIA</p>
+            <p>
+              e-mail: llmadvocacia@bol.com.br - Telefone: 21 96435-6715 - 21
+              97873-5511
+            </p>
+          </div>
+        </div>
+        <div class="pdf-button-container">
+          <button id="botaoPDFProcuracao" class="pdf-button">
+            Download Procuração PDF
+          </button>
+        </div>
+
+        <div id="previewDocumentoGratuidade" class="documento">
+          <h2 class="titleText"><u>AUSPÍCIOS DE GRATUIDADE DE JUSTIÇA</u></h2>
+
+          <p id="corpoGratuidade" style="margin-top: 30px"></p>
+
+          <div class="data-assinatura">
+            <p>
+              Rio de Janeiro, _____ de _____________ de
+              <span data-ano-atual></span>
+            </p>
+            <div class="linha-assinatura"></div>
+            <p>Assinatura</p>
+          </div>
+          <div class="footer-advogado">
+            <p>LLM ADVOCACIA</p>
+            <p>
+              e-mail: llmadvocacia@bol.com.br - Telefone: 21 96435-6715 - 21
+              97873-5511
+            </p>
+          </div>
+        </div>
+        <div class="pdf-button-container">
+          <button id="botaoPDFGratuidade" class="pdf-button">
+            Download Gratuidade PDF
+          </button>
+        </div>
+
+        <div id="previewDocumentoDeclaracao" class="documento">
+          <h2>DECLARAÇÃO</h2>
+
+          <p id="corpoDeclaracao" style="margin-top: 30px"></p>
+
+          <div class="data-assinatura">
+            <p>
+              Rio de Janeiro, _____ de _____________ de
+              <span data-ano-atual></span>
+            </p>
+            <div class="linha-assinatura"></div>
+            <p>Assinatura</p>
+          </div>
+          <div class="footer-advogado">
+            <p>LLM ADVOCACIA</p>
+            <p>
+              e-mail: llmadvocacia@bol.com.br - Telefone: 21 96435-6715 - 21
+              97873-5511
+            </p>
+          </div>
+        </div>
+        <div class="pdf-button-container">
+          <button id="botaoPDFDeclaracao" class="pdf-button">
+            Download Declaração PDF
+          </button>
+        </div>
+
+        <div id="previewDocumentoContrato" class="documento">
+          <h2 class="titleText">
+            <u>CONTRATO DE PRESTAÇÃO DE SERVIÇOS E HONORÁRIOS ADVOCATÍCIOS</u>
+          </h2>
+
+          <p id="corpoContrato" style="margin-top: 30px"></p>
+
+          <div class="footer-advogado">
+            <p>LLM ADVOCACIA</p>
+            <p>
+              e-mail: llmadvocacia@bol.com.br - Telefone: 21 96435-6715 - 21
+              97873-5511
+            </p>
+          </div>
+        </div>
+        <div class="pdf-button-container">
+          <button id="botaoPDFContrato" class="pdf-button">
+            Download Contrato PDF
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
