@@ -1,16 +1,12 @@
-// js/GeradorTermo.js
-
 import { GeradorDocumentoBase } from "./GeradorDocumentoBase.js";
 
 export class GeradorTermo extends GeradorDocumentoBase {
   constructor(cliente) {
-    // O ID do elemento HTML do termo
     super("previewDocumentoTermo", cliente);
     this.pdfFileName = `TERMO - ${cliente.nome}.pdf`;
   }
 
   gerarConteudoEspecifico() {
-    // Seleciona o elemento específico DENTRO do contêiner do termo
     const corpoTermoElement = this.documentElement.querySelector("#corpoTermo");
     if (corpoTermoElement) {
       corpoTermoElement.innerHTML = `

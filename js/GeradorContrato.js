@@ -1,16 +1,12 @@
-// js/GeradorContrato.js
-
 import { GeradorDocumentoBase } from "./GeradorDocumentoBase.js";
 
 export class GeradorContrato extends GeradorDocumentoBase {
   constructor(cliente) {
-    // O ID do elemento HTML do contrato
     super("previewDocumentoContrato", cliente);
     this.pdfFileName = `CONTRATO - ${cliente.nome.toUpperCase()}.pdf`;
   }
 
   gerarConteudoEspecifico() {
-    // Seleciona o elemento específico DENTRO do contêiner do contrato
     const corpoContratoElement =
       this.documentElement.querySelector("#corpoContrato");
     if (corpoContratoElement) {

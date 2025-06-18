@@ -1,16 +1,12 @@
-// js/GeradorDeclaracao.js
-
 import { GeradorDocumentoBase } from "./GeradorDocumentoBase.js";
 
 export class GeradorDeclaracao extends GeradorDocumentoBase {
   constructor(cliente) {
-    // O ID do elemento HTML da declaração
     super("previewDocumentoDeclaracao", cliente);
     this.pdfFileName = `DECLARAÇÃO - ${cliente.nome}.pdf`;
   }
 
   gerarConteudoEspecifico() {
-    // Seleciona o elemento específico DENTRO do contêiner da declaração
     const corpoDeclaracaoElement =
       this.documentElement.querySelector("#corpoDeclaracao");
     if (corpoDeclaracaoElement) {

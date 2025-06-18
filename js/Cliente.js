@@ -1,5 +1,3 @@
-// js/Cliente.js
-
 export class Cliente {
   constructor(
     nome,
@@ -31,10 +29,6 @@ export class Cliente {
     this.numero = numero;
   }
 
-  /**
-   * Retorna o CPF formatado como XXX.XXX.XXX-XX.
-   * @returns {string} O CPF formatado ou o original se inválido.
-   */
   formatarCPF() {
     if (this.cpf && this.cpf.length === 11) {
       return this.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
@@ -42,10 +36,6 @@ export class Cliente {
     return this.cpf;
   }
 
-  /**
-   * Gera o texto completo do outorgante formatado para o documento.
-   * @returns {string} O HTML formatado do outorgante.
-   */
   getClienteQualificao() {
     return `<strong>${this.nome.toUpperCase()}</strong>, ${
       this.nacionalidade

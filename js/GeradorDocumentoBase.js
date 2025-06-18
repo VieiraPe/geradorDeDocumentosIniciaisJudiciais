@@ -1,5 +1,3 @@
-// js/GeradorDocumentoBase.js
-
 import { Cliente } from "./Cliente.js";
 
 export class GeradorDocumentoBase {
@@ -39,31 +37,25 @@ export class GeradorDocumentoBase {
     return this.documentElement;
   }
 
-  /**
-   * Gera o PDF do documento atual, lidando com múltiplas páginas se o conteúdo for extenso.
-   */
   async gerarPDF() {
     if (!this.documentElement) {
       console.error(`Elemento do documento não encontrado para gerar PDF.`);
       return;
     }
 
-    this.documentElement.style.display = "block"; // Garante que esteja visível
+    this.documentElement.style.display = "block";
 
-    // Considerar um pequeno padding ou offset para evitar cortes bruscos na imagem
-    // ou se o CSS do documento já tiver padding.
-    const paddingOffset = 5; // Ajuste este valor se ainda vir um corte na borda
+    const paddingOffset = 5;
 
     const options = {
-      scale: 2, // Aumenta a resolução para melhor qualidade no PDF
+      scale: 2,
       logging: false,
       useCORS: true,
       allowTaint: true,
       letterRendering: true,
-      // Para html2canvas, usar offsetWidth/Height é geralmente o mais direto
       width: this.documentElement.offsetWidth,
-      height: this.documentElement.offsetHeight + paddingOffset, // Adiciona um pequeno buffer na altura
-      windowHeight: this.documentElement.scrollHeight + paddingOffset, // Importante para capturar todo o conteúdo rolável
+      height: this.documentElement.offsetHeight + paddingOffset,
+      windowHeight: this.documentElement.scrollHeight + paddingOffset,
     };
 
     try {
@@ -76,28 +68,20 @@ export class GeradorDocumentoBase {
         format: "a4",
       });
 
-      // Dimensões da página A4 em mm
-      const pdfPageWidth = pdf.internal.pageSize.getWidth(); // A4 = 210mm
-      const pdfPageHeight = pdf.internal.pageSize.getHeight(); // A4 = 297mm
+      const pdfPageWidth = pdf.internal.pageSize.getWidth();
+      const pdfPageHeight = pdf.internal.pageSize.getHeight();
 
-      // Calcular a altura da imagem no PDF, mantendo a proporção da imagem capturada
       const imgHeightScaled = (canvas.height * pdfPageWidth) / canvas.width;
-      let heightLeft = imgHeightScaled; // Altura restante da imagem a ser adicionada
+      let heightLeft = imgHeightScaled;
 
-      let pageCount = 0; // Contador de páginas adicionadas
+      let pageCount = 0;
 
-      // Adicionar a primeira página
       pdf.addImage(imgData, "PNG", 0, 0, pdfPageWidth, imgHeightScaled);
-      heightLeft -= pdfPageHeight; // Subtrai a altura da primeira página
+      heightLeft -= pdfPageHeight;
 
-      // Loop para adicionar páginas subsequentes
-      // A condição `heightLeft > -1` (ou `heightLeft > 0.01` para flutuantes)
-      // é mais segura para evitar páginas em branco, pois verifica se ainda há
-      // conteúdo significativo que exceda a altura de uma página.
       while (heightLeft > 0) {
-        // Alterado para > 0 para evitar página extra
         pageCount++;
-        const currentPosition = -(pdfPageHeight * pageCount); // Deslocamento para cima para a próxima seção da imagem
+        const currentPosition = -(pdfPageHeight * pageCount);
         pdf.addPage();
         pdf.addImage(
           imgData,

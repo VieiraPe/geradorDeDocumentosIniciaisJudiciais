@@ -9,7 +9,7 @@
 
 /* Configurações básicas e globais */
 * {
-  box-sizing: border-box; /* Garante que padding e borda sejam incluídos na largura/altura */
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
   font-family: "Times New Roman", Times, serif;
@@ -43,7 +43,51 @@ h3 {
   font-size: 1.2rem;
 }
 
-/* Contêiner principal do conteúdo */
+button {
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-weight: 600;
+  display: inline-block;
+  margin: 10px 5px;
+  flex-shrink: 0;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--dark-color);
+}
+
+input:not(.cep-input-group-container input),
+select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border 0.3s;
+  box-sizing: border-box;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+
 .container {
   max-width: 1000px;
   margin: 0 auto;
@@ -59,65 +103,27 @@ h3 {
   margin-bottom: 30px;
 }
 
-/* GRID DO FORMULÁRIO: ORGANIZA OS GRUPOS DE CAMPOS EM COLUNAS */
 .form-grid {
   display: grid;
-  /* Cria colunas flexíveis: cada coluna terá no mínimo 250px e crescerá para preencher o espaço disponível. */
-  /* 'auto-fit' permite que mais colunas sejam criadas se houver espaço, até 3 colunas em telas largas. */
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 15px; /* Espaçamento entre os grupos de campos */
+  gap: 15px;
 }
 
-/* GRUPOS DE FORMULÁRIO: CONTÊINER PARA LABEL E INPUT/SELECT */
 .form-group {
   margin-bottom: 15px;
-  /* ALTERADO: Removido 'display: flex' e 'flex-direction: column' daqui. */
-  /* Agora, o .form-group é um item direto do grid e o conteúdo interno se alinha por padrão. */
 }
 
-/* ESTILOS PARA LABELS */
-label {
-  display: block; /* Garante que a label ocupe sua própria linha */
-  margin-bottom: 8px;
-  font-weight: 600;
-  color: var(--dark-color);
-}
-
-/* ESTILOS GERAIS PARA INPUTS E SELECTS (EXCETO ELEMENTOS DENTRO DO CONTÊINER DO CEP) */
-input:not(.cep-input-group-container input), /* Aplica a todos os inputs, EXCETO o dentro de '.cep-input-group-container' */
-select {
-  width: 100%; /* Ocupa a largura total do seu contêiner pai (.form-group) */
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 16px;
-  transition: border 0.3s;
-  box-sizing: border-box; /* Inclui padding e borda na largura total */
-}
-
-/* ESTILOS DE FOCO PARA INPUTS E SELECTS */
-input:focus,
-select:focus {
-  outline: none;
-  border-color: var(--secondary-color);
-  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-}
-
-/* CONTÊINER ESPECÍFICO DO CAMPO CEP E SEUS ELEMENTOS (INPUT, BOTÃO, ÍCONES) */
 .cep-input-group-container {
-  display: flex; /* Alinha o input, botão e ícones na mesma linha */
-  align-items: center; /* Alinha verticalmente os itens ao centro */
-  gap: 8px; /* Espaçamento entre os elementos (input, botão, ícones) */
-  width: 100%; /* Garante que o contêiner do CEP ocupe a largura total da sua coluna no grid */
-  flex-wrap: nowrap; /* Impede que os itens internos do CEP quebrem para a próxima linha */
-  /* NOVO: Ajuste a largura do .form-group se ele se expandir demais. */
-  /* Esta regra agora está no nível do item de grid, não dentro de um flex-item de coluna. */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  flex-wrap: nowrap;
 }
 
-/* INPUT DO CEP DENTRO DO SEU CONTÊINER FLEX */
 .cep-input-group-container input#cepCliente {
-  width: 140px; /* Define uma largura fixa para o input do CEP */
-  flex-shrink: 0; /* Impede que o input do CEP encolha */
+  width: 140px;
+  flex-shrink: 0;
   padding: 12px;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -125,42 +131,19 @@ select:focus {
   box-sizing: border-box;
 }
 
-/* ESTILOS GERAIS DE BOTÕES */
-button {
-  background-color: var(--secondary-color);
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  font-size: 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  font-weight: 600;
-  display: inline-block;
-  margin: 10px 5px; /* Mantém margens padrão, pode ser ajustado se causar desalinhamento */
-  flex-shrink: 0; /* Impede que o botão encolha em layouts flexíveis */
-}
-
-button:hover {
-  background-color: #2980b9;
-}
-
-/* BOTÃO DE BUSCA DO CEP ESPECÍFICO */
 .cep-input-group-container button#cepButton {
-  margin: 0; /* Remove as margens padrão do botão para melhor alinhamento dentro do flex */
-  padding: 12px 15px; /* Ajusta o padding para que a altura do botão seja consistente com o input */
-  flex-shrink: 0; /* Impede que o botão encolha */
+  margin: 0;
+  padding: 12px 15px;
+  flex-shrink: 0;
 }
 
-/* ESTILOS DOS ÍCONES DE STATUS DO CEP (SPINNER, CHECKMARK, ERRO) */
 .cep-status-icons {
   display: flex;
-  align-items: center; /* Alinha verticalmente os ícones */
-  min-width: 20px; /* Garante espaço mínimo para os ícones */
-  font-weight: bold; /* Para o '✓' e '✕' serem mais visíveis */
+  align-items: center;
+  min-width: 20px;
+  font-weight: bold;
 }
 
-/* ANIMAÇÃO PARA O SPINNER DO CEP */
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -171,17 +154,16 @@ button:hover {
 }
 
 .spinner-animation {
-  border: 4px solid rgba(0, 0, 0, 0.1); /* Cor base da borda */
-  border-left-color: var(--secondary-color); /* Cor que gira */
-  border-radius: 50%; /* Torna o elemento circular */
-  width: 20px; /* Tamanho do spinner */
-  height: 20px; /* Tamanho do spinner */
-  animation: spin 1s linear infinite; /* Aplica a animação de giro */
-  display: inline-block; /* Garante que o spinner seja exibido corretamente */
-  vertical-align: middle; /* Alinha com o texto/elementos próximos */
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: var(--secondary-color);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
 }
 
-/* SEÇÃO DE SELEÇÃO DE DOCUMENTOS */
 .document-selection-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -196,20 +178,19 @@ button:hover {
 .checkbox-group {
   display: flex;
   align-items: center;
-  gap: 8px; /* Espaço entre o checkbox e o label */
+  gap: 8px;
 }
 
 .checkbox-group input[type="checkbox"] {
-  width: auto; /* Deixa o checkbox ter seu tamanho natural */
-  margin: 0; /* Remove margens extras */
+  width: auto;
+  margin: 0;
 }
 
 .checkbox-group label {
-  margin: 0; /* Remove margem superior/inferior padrão de label */
+  margin: 0;
   cursor: pointer;
 }
 
-/* AÇÕES DO FORMULÁRIO E CONTÊINERES DE BOTÕES PDF */
 .form-actions,
 .pdf-button-container {
   text-align: center;
@@ -234,12 +215,12 @@ hr {
   padding: 50px;
   border: 1px solid #000;
   margin: 20px auto;
-  width: 210mm; /* Largura padrão A4 */
-  min-height: 297mm; /* Altura padrão A4 */
+  width: 210mm;
+  min-height: 297mm;
   position: relative;
   font-size: 14pt;
   line-height: 1.5;
-  display: none; /* Controlado por JS */
+  display: none;
 }
 
 .documento h1 {
@@ -304,12 +285,11 @@ hr {
 .pdf-button-container {
   text-align: center;
   margin-top: 15px;
-  margin-bottom: 30px; /* Adiciona espaço após o botão */
+  margin-bottom: 30px;
 }
 
 .pdf-button {
-  background-color: var(--success-color); /* Cor verde para download */
-  /* Inherits general button styles */
+  background-color: var(--success-color);
 }
 
 .pdf-button:hover {
@@ -319,7 +299,7 @@ hr {
 /* MEDIA QUERIES PARA RESPONSIVIDADE */
 @media (max-width: 768px) {
   .form-grid {
-    grid-template-columns: 1fr; /* Uma única coluna em telas menores */
+    grid-template-columns: 1fr;
   }
 
   .container {
@@ -336,12 +316,12 @@ hr {
   }
 
   .data-assinatura {
-    position: static; /* Remove posicionamento absoluto em mobile se causar problemas */
+    position: static;
     margin-top: 50px;
     margin-bottom: 20px;
   }
   .linha-assinatura {
-    width: 80%; /* Ajusta a largura da linha de assinatura para telas menores */
+    width: 80%;
   }
 }
 
@@ -362,9 +342,8 @@ hr {
 
   button,
   #botaoPDF,
-  .pdf-button-container, /* Oculta todos os contêineres de botões de PDF */
+  .pdf-button-container,
   .form-actions {
-    /* Oculta as ações do formulário na impressão */
     display: none;
   }
 

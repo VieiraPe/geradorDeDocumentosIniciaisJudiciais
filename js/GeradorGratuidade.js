@@ -4,13 +4,11 @@ import { GeradorDocumentoBase } from "./GeradorDocumentoBase.js";
 
 export class GeradorGratuidade extends GeradorDocumentoBase {
   constructor(cliente) {
-    // O ID do elemento HTML do termo
     super("previewDocumentoGratuidade", cliente);
     this.pdfFileName = `TERMO - ${cliente.nome}.pdf`;
   }
 
   gerarConteudoEspecifico() {
-    // Seleciona o elemento específico DENTRO do contêiner do termo
     const corpoGratuidadeElement = this.documentElement.querySelector("#corpoGratuidade");
     if (corpoGratuidadeElement) {
       corpoGratuidadeElement.innerHTML = `
