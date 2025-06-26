@@ -31,7 +31,7 @@ export class Cliente {
 
   formatarCPF() {
     if (this.cpf && this.cpf.length === 11) {
-      return this.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+      return this.cpf.replace((/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4"));
     }
     return this.cpf;
   }

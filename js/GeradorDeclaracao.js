@@ -3,7 +3,7 @@ import { GeradorDocumentoBase } from "./GeradorDocumentoBase.js";
 export class GeradorDeclaracao extends GeradorDocumentoBase {
   constructor(cliente) {
     super("previewDocumentoDeclaracao", cliente);
-    this.pdfFileName = `DECLARAÇÃO - ${cliente.nome}.pdf`;
+    this.pdfFileName = `DECLARAÇÃO - ${this.cliente.nome}.pdf`;
   }
 
   gerarConteudoEspecifico() {

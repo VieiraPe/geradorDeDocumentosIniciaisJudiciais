@@ -5,11 +5,12 @@ import { GeradorDocumentoBase } from "./GeradorDocumentoBase.js";
 export class GeradorGratuidade extends GeradorDocumentoBase {
   constructor(cliente) {
     super("previewDocumentoGratuidade", cliente);
-    this.pdfFileName = `TERMO - ${cliente.nome}.pdf`;
+    this.pdfFileName = `TERMO - ${this.cliente.nome}.pdf`;
   }
 
   gerarConteudoEspecifico() {
-    const corpoGratuidadeElement = this.documentElement.querySelector("#corpoGratuidade");
+    const corpoGratuidadeElement =
+      this.documentElement.querySelector("#corpoGratuidade");
     if (corpoGratuidadeElement) {
       corpoGratuidadeElement.innerHTML = `
         ${this.cliente.getClienteQualificao()}

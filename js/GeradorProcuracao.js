@@ -1,10 +1,9 @@
-
 import { GeradorDocumentoBase } from "./GeradorDocumentoBase.js";
 
 export class GeradorProcuracao extends GeradorDocumentoBase {
   constructor(cliente) {
     super("previewDocumentoProcuracao", cliente);
-    this.pdfFileName = `PROCURAÇÃO - ${cliente.nome}.pdf`;
+    this.pdfFileName = `PROCURAÇÃO - ${this.cliente.nome}.pdf`;
   }
 
   gerarConteudoEspecifico() {

@@ -3,7 +3,7 @@ import { GeradorDocumentoBase } from "./GeradorDocumentoBase.js";
 export class GeradorTermo extends GeradorDocumentoBase {
   constructor(cliente) {
     super("previewDocumentoTermo", cliente);
-    this.pdfFileName = `TERMO - ${cliente.nome}.pdf`;
+    this.pdfFileName = `TERMO - ${this.cliente.nome}.pdf`;
   }
 
   gerarConteudoEspecifico() {
